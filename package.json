@@ -1,0 +1,31 @@
+{
+  "name": "nodejs-learning-koa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-body": "^4.1.0",
+    "koa-pug": "^3.0.0-2",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.12.0",
+    "koa-static": "^5.0.0",
+    "pug": "^2.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "scripts": {
+    "nodemon": "nodemon --ignore server/models/ app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Glacialix/nodejs-learning-koa.git"
+  },
+  "author": "Ivan Klimenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Glacialix/nodejs-learning-koa/issues"
+  },
+  "homepage": "https://github.com/Glacialix/nodejs-learning-koa#readme"
+}
