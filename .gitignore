@@ -39,3 +39,4 @@ public
 # Node.JS
 node_modules
 npm-debug.log
+server/config/

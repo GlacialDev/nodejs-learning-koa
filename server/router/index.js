@@ -4,6 +4,7 @@ const router = new Router();
 let productsCtrl = require("../controllers/products");
 let countersCtrl = require("../controllers/counters");
 let authCtrl = require("../controllers/auth");
+let mailCtrl = require("../controllers/mail");
 
 router.get("/", async ctx => {
   try {
@@ -16,7 +17,24 @@ router.get("/", async ctx => {
     });
   } catch (err) {
     console.error("err", err);
-    ctx.status = 404;
+    ctx.status = err.status || 404;
+  }
+});
+
+router.post("/", async ctx => {
+  try {
+    await mailCtrl.send(ctx.request.body);
+
+    let products = await productsCtrl.get();
+    let skills = await countersCtrl.get();
+
+    ctx.render("index", {
+      products,
+      skills
+    });
+  } catch (err) {
+    console.error("err", err);
+    ctx.status = err.status || 500;
   }
 });
 
@@ -25,7 +43,7 @@ router.get("/login", async ctx => {
     ctx.render("login");
   } catch (err) {
     console.error("err", err);
-    ctx.status = 404;
+    ctx.status = err.status || 500;
   }
 });
 
@@ -38,6 +56,7 @@ router.post("/login", async ctx => {
   } catch (err) {
     console.error("err", err);
     ctx.redirect("/login");
+    ctx.status = err.status || 500;
   }
 });
 
@@ -50,7 +69,7 @@ router.get("/admin", async ctx => {
     }
   } catch (err) {
     console.error("err", err);
-    ctx.status = 404;
+    ctx.status = err.status || 404;
   }
 });
 
@@ -61,7 +80,7 @@ router.post("/admin/upload", async ctx => {
     ctx.render("admin");
   } catch (err) {
     console.error("err", err);
-    ctx.status = err.status;
+    ctx.status = err.status || 500;
   }
 });
 
@@ -72,7 +91,7 @@ router.post("/admin/skills", async ctx => {
     ctx.render("admin");
   } catch (err) {
     console.error("err", err);
-    ctx.status = err.status;
+    ctx.status = err.status || 500;
   }
 });
 
